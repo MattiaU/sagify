@@ -93,6 +93,7 @@ class SageMakerClient(object):
             self,
             image_name,
             s3_model_location,
+            model_name,
             train_instance_count,
             train_instance_type,
             tags=None
@@ -101,6 +102,7 @@ class SageMakerClient(object):
         Deploy model to SageMaker
         :param image_name: [str], name of Docker image
         :param s3_model_location: [str], model location in S3
+        :param model_name: [str], SageMaker model name
         :param train_instance_count: [str],  number of ec2 instances
         :param train_instance_type: [str], ec2 instance type
         :param tags: [optional[list[dict]], default: None], List of tags for labeling a training
@@ -123,6 +125,7 @@ class SageMakerClient(object):
 
         model = sage.Model(
             model_data=s3_model_location,
+            name=model_name,
             image=image,
             role=self.role,
             sagemaker_session=self.sagemaker_session

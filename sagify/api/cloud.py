@@ -100,12 +100,13 @@ def train(
     )
 
 
-def deploy(dir, s3_model_location, num_instances, ec2_type, docker_tag, tags=None):
+def deploy(dir, s3_model_location, model_name, num_instances, ec2_type, docker_tag, tags=None):
     """
     Deploys ML model(s) on SageMaker
 
     :param dir: [str], source root directory
     :param s3_model_location: [str], S3 model location
+    :param model_name: [str], SageMaker model name
     :param num_instances: [int], number of ec2 instances
     :param ec2_type: [str], ec2 instance type. Refere to:
     https://aws.amazon.com/sagemaker/pricing/instance-types/
@@ -133,6 +134,7 @@ def deploy(dir, s3_model_location, num_instances, ec2_type, docker_tag, tags=Non
     return sage_maker_client.deploy(
         image_name=image_name,
         s3_model_location=s3_model_location,
+        model_name=model_name,
         train_instance_count=num_instances,
         train_instance_type=ec2_type,
         tags=tags
