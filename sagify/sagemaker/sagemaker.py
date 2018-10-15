@@ -30,6 +30,7 @@ class SageMakerClient(object):
     def train(
             self,
             image_name,
+            job_name,
             input_s3_data_location,
             train_instance_count,
             train_instance_type,
@@ -85,7 +86,7 @@ class SageMakerClient(object):
         if tags:
             estimator.tags = tags
 
-        estimator.fit(input_s3_data_location)
+        estimator.fit(input_s3_data_location, job_name=job_name)
 
         return estimator.model_data
 

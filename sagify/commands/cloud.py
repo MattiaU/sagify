@@ -91,10 +91,12 @@ def upload_data(dir, input_dir, s3_dir):
     help='Tags for labeling a training job of the form "tag1=value1;tag2=value2". For more, see '
          'https://docs.aws.amazon.com/sagemaker/latest/dg/API_Tag.html.'
 )
+@click.option(u"-j", u"--job_name", required=False, help='Training job name')
 @click.pass_obj
 def train(
         obj,
         dir,
+        job_name,
         input_s3_dir,
         output_s3_dir,
         hyperparams_file,
@@ -112,6 +114,7 @@ def train(
     try:
         s3_model_location = api_cloud.train(
             dir=dir,
+            job_name=job_name,
             input_s3_dir=input_s3_dir,
             output_s3_dir=output_s3_dir,
             hyperparams_file=hyperparams_file,

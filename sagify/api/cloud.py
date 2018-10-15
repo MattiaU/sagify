@@ -44,6 +44,7 @@ def upload_data(dir, input_dir, s3_dir):
 
 def train(
         dir,
+        job_name,
         input_s3_dir,
         output_s3_dir,
         hyperparams_file,
@@ -57,6 +58,7 @@ def train(
     Trains ML model(s) on SageMaker
 
     :param dir: [str], source root directory
+    :param job_name [str], training job name
     :param input_s3_dir: [str], S3 location to input data
     :param output_s3_dir: [str], S3 location to save output (models, etc)
     :param hyperparams_file: [str], path to hyperparams json file
@@ -89,6 +91,7 @@ def train(
 
     return sage_maker_client.train(
         image_name=image_name,
+        job_name=job_name,
         input_s3_data_location=input_s3_dir,
         train_instance_count=1,
         train_instance_type=ec2_type,
