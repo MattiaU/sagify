@@ -151,7 +151,7 @@ def train(
          'https://docs.aws.amazon.com/sagemaker/latest/dg/API_Tag.html.'
 )
 @click.option(u"-mn", u"--model-name", required=False, type=str, help="SageMaker model name")
-@click.option(u"-v", u"--vpc-configs", required=False, type=str, help="VPC configs path")
+@click.option(u"-vpc", u"--vpc-configs", required=False, type=str, help="VPC configs path")
 @click.pass_obj
 def deploy(obj, dir, s3_model_location, model_name, num_instances, ec2_type, aws_tags, vpc_configs):
     """
