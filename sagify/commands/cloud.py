@@ -151,8 +151,9 @@ def train(
          'https://docs.aws.amazon.com/sagemaker/latest/dg/API_Tag.html.'
 )
 @click.option(u"-mn", u"--model-name", required=False, type=str, help="SageMaker model name")
+@click.option(u"-v", u"--vpc-configs", required=False, type=str, help="VPC configs path")
 @click.pass_obj
-def deploy(obj, dir, s3_model_location, model_name, num_instances, ec2_type, aws_tags):
+def deploy(obj, dir, s3_model_location, model_name, num_instances, ec2_type, aws_tags, vpc_configs):
     """
     Command to deploy ML model(s) on SageMaker
     """
@@ -164,6 +165,7 @@ def deploy(obj, dir, s3_model_location, model_name, num_instances, ec2_type, aws
             dir=dir,
             s3_model_location=s3_model_location,
             model_name=model_name,
+            vpc_configs=vpc_configs,
             num_instances=num_instances,
             ec2_type=ec2_type,
             docker_tag=obj['docker_tag'],

@@ -9,10 +9,14 @@ import boto3
 
 
 class SageMakerClient(object):
-    def __init__(self, aws_profile, aws_region):
+    def __init__(self, aws_profile, aws_region, vpc_conf_path):
         self.boto_session = boto3.Session(profile_name=aws_profile, region_name=aws_region)
         self.sagemaker_session = sage.Session(boto_session=self.boto_session)
         self.role = sage.get_execution_role(self.sagemaker_session)
+        if vpc_configs is not None:
+            self.vpc_configs = json.load(open(vpc_conf_path, 'rb'))
+        else:
+            self.vpc_configs = None
 
     def upload_data(self, input_dir, s3_dir):
         """
@@ -129,7 +133,8 @@ class SageMakerClient(object):
             name=model_name,
             image=image,
             role=self.role,
-            sagemaker_session=self.sagemaker_session
+            sagemaker_session=self.sagemaker_session,
+            vpc_config=self.vpc_configs
         )
 
         model.deploy(
