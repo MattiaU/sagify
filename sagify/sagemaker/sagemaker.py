@@ -13,7 +13,7 @@ class SageMakerClient(object):
         self.boto_session = boto3.Session(profile_name=aws_profile, region_name=aws_region)
         self.sagemaker_session = sage.Session(boto_session=self.boto_session)
         self.role = sage.get_execution_role(self.sagemaker_session)
-        if vpc_configs is not None:
+        if vpc_conf_path is not None:
             self.vpc_configs = json.load(open(vpc_conf_path, 'rb'))
         else:
             self.vpc_configs = None
