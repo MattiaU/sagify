@@ -6,6 +6,7 @@ import sagemaker as sage
 from six.moves.urllib.parse import urlparse
 
 import boto3
+import json
 
 
 class SageMakerClient(object):
