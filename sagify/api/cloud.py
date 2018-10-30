@@ -104,7 +104,7 @@ def train(
 
 
 def deploy(dir, s3_model_location, model_name, vpc_configs,
-           num_instances, ec2_type, tags=None):
+           num_instances, ec2_type, docker_tag, tags=None):
     """
     Deploys ML model(s) on SageMaker
 
